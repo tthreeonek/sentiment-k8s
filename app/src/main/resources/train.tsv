@@ -1,0 +1,89 @@
+# label<TAB>text — обучающая выборка для наивного байесовского классификатора (en + ru)
+positive	hello, nice to meet you
+positive	hello friend, have a great day
+positive	hi, thank you so much
+positive	I love this product, it is amazing
+positive	great job, excellent work
+positive	this is wonderful and fantastic
+positive	the service was fast and good
+positive	I am very happy with the result
+positive	awesome experience, highly recommend
+positive	best movie I have ever seen
+positive	thanks, you are the best
+positive	the app works perfectly, great update
+positive	nice design and good quality
+positive	I like it a lot, very cool
+positive	brilliant idea, well done
+positive	everything is fine and I am glad
+positive	beautiful weather and a pleasant evening
+positive	the support team was helpful and kind
+positive	super fast delivery, happy customer
+positive	love it, perfect choice
+positive	привет, рад тебя видеть
+positive	отличная работа, спасибо большое
+positive	мне очень понравилось, супер
+positive	прекрасный сервис и быстрая доставка
+positive	это лучший фильм, рекомендую
+positive	хороший товар, качество отличное
+positive	я счастлив, все получилось
+positive	замечательный день и отличное настроение
+positive	спасибо за помощь, вы молодцы
+positive	классное приложение, удобно и быстро
+positive	великолепно, просто восторг
+positive	очень доволен покупкой
+positive	круто, мне нравится
+positive	приятный интерфейс и хорошая скорость
+negative	I hate this, it is terrible
+negative	the worst service ever
+negative	this product is bad and broken
+negative	very slow and disappointing
+negative	awful experience, never again
+negative	I am angry and upset
+negative	the app crashes all the time, useless
+negative	poor quality, waste of money
+negative	horrible movie, boring and stupid
+negative	the delivery was late and the box was damaged
+negative	error again, nothing works
+negative	I do not like it at all, sad
+negative	rude support and bad attitude
+negative	this is a disaster, so annoying
+negative	ugly design and buggy interface
+negative	the food was cold and disgusting
+negative	failed to load, very bad
+negative	ужасный сервис, никогда больше
+negative	это худший фильм, скучно
+negative	плохое качество, деньги на ветер
+negative	все сломалось, ничего не работает
+negative	очень медленно и неудобно
+negative	я расстроен и зол
+negative	отвратительная поддержка, грубят
+negative	приложение постоянно падает, ошибка
+negative	доставка опоздала, товар испорчен
+negative	мне не понравилось, разочарование
+negative	кошмар, ужасно и противно
+negative	плохо, очень плохо
+negative	грустно и обидно
+neutral	the meeting is scheduled for monday
+neutral	the package contains two items
+neutral	the report has ten pages
+neutral	the train leaves at nine
+neutral	this is a text about kubernetes
+neutral	the store opens in the morning
+neutral	I will check the documentation tomorrow
+neutral	the file is located in the folder
+neutral	the price is listed on the website
+neutral	the weather forecast for today
+neutral	the cluster has one node
+neutral	please send the document by email
+neutral	the server is running in the cloud
+neutral	встреча назначена на понедельник
+neutral	поезд отправляется в девять часов
+neutral	документ находится в папке
+neutral	отчет состоит из десяти страниц
+neutral	магазин открывается утром
+neutral	сервер работает в облаке
+neutral	завтра я проверю документацию
+neutral	в кластере один узел
+neutral	цена указана на сайте
+neutral	это текст про контейнеры
+neutral	отправьте файл по почте

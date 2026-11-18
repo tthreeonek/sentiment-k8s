@@ -1,0 +1,20 @@
+# Генератор нагрузки для проверки HPA: непрерывный цикл запросов к сервису (один поток).
+# kubectl apply -f loadtest/load-generator.yaml   /   kubectl delete -f loadtest/load-generator.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: load-generator
+  namespace: ai-app
+spec:
+  restartPolicy: Never
+  containers:
+    - name: load
+      image: busybox:1.37
+      command: ["/bin/sh", "-c"]
+      args:
+        - |
+          while true; do
+            wget -q -O /dev/null "http://sentiment-api.ai-app.svc/api/sentiment?text=great+service+but+slow+delivery"
+          done
+      resources:
+        requests: { cpu: 10m, memory: 16Mi }

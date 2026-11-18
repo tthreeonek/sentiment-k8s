@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sentiment-api
+  namespace: ai-app
+  labels:
+    app: sentiment-api
+spec:
+  replicas: 3                      # минимум 3 реплики (дальше управляет HPA)
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: sentiment-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: sentiment-api
+      annotations:                   # Prometheus собирает метрики Actuator по аннотациям пода
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: "8080"
+    spec:
+      containers:
+        - name: sentiment-api
+          image: sentiment-api:1.0
+          imagePullPolicy: Never     # образ загружен в minikube (minikube image load)
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: JAVA_OPTS          # компактная JVM: узел всего с 2 ГБ RAM
+              value: "-XX:+UseSerialGC -Xmx64m -Xss256k -XX:TieredStopAtLevel=1 -XX:ReservedCodeCacheSize=24m -XX:MaxMetaspaceSize=96m -XX:MaxDirectMemorySize=16m"
+            - name: SERVER_TOMCAT_THREADS_MAX
+              value: "16"
+          resources:
+            requests:
+              cpu: 100m              # от этого значения HPA считает % загрузки CPU
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 300Mi
+          startupProbe:
+            httpGet: { path: /actuator/health/liveness, port: http }
+            periodSeconds: 5
+            failureThreshold: 60     # до 5 минут на старт на слабом узле
+          readinessProbe:
+            httpGet: { path: /actuator/health/readiness, port: http }
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /actuator/health/liveness, port: http }
+            periodSeconds: 20

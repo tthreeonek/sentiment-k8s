@@ -1,0 +1,47 @@
+# Prometheus (чарт prometheus-community/prometheus) для узла 1 vCPU / 2 ГБ RAM:
+# только сервер Prometheus, без alertmanager/pushgateway/node-exporter/kube-state-metrics.
+# Оставлено одно задание сбора kubernetes-pods: метрики Actuator по аннотациям пода
+# prometheus.io/scrape|path|port.
+# Тяжёлые задания (apiserver, kubelet, cAdvisor через proxy API) отключены — узел 1 vCPU / 2 ГБ.
+alertmanager:
+  enabled: false
+prometheus-pushgateway:
+  enabled: false
+prometheus-node-exporter:
+  enabled: false
+kube-state-metrics:
+  enabled: false        # число реплик считаем по up{} подов приложения
+
+server:
+  global:
+    scrape_interval: 30s
+    evaluation_interval: 30s
+  retention: 12h
+  persistentVolume:
+    enabled: false
+  strategy:
+    type: Recreate
+  resources:
+    requests: { cpu: 20m, memory: 160Mi }
+    limits: { memory: 400Mi }
+  # мягкие пробы: на 1 vCPU ответы бывают медленными, частые рестарты только усиливают нагрузку
+  livenessProbeInitialDelay: 60
+  livenessProbeTimeout: 30
+  livenessProbeFailureThreshold: 10
+  readinessProbeTimeout: 30
+  readinessProbeFailureThreshold: 10
+
+configmapReload:
+  prometheus:
+    enabled: false      # без sidecar перезагрузки конфигурации (экономия ресурсов)
+
+# Задания сбора по умолчанию (карта scrapeConfigs чарта): оставлены prometheus и kubernetes-pods.
+scrapeConfigs:
+  kubernetes-api-servers: { enabled: false }
+  kubernetes-nodes: { enabled: false }
+  kubernetes-nodes-cadvisor: { enabled: false }
+  kubernetes-service-endpoints: { enabled: false }
+  kubernetes-service-endpoints-slow: { enabled: false }
+  prometheus-pushgateway: { enabled: false }
+  kubernetes-services: { enabled: false }
+  kubernetes-pods-slow: { enabled: false }

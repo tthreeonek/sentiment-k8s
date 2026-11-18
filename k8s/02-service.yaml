@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sentiment-api
+  namespace: ai-app
+  labels:
+    app: sentiment-api
+spec:
+  type: LoadBalancer               # внешний IP выдаёт `minikube tunnel`
+  selector:
+    app: sentiment-api
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
