@@ -14,7 +14,7 @@ spec:
       args:
         - |
           while true; do
-            wget -q -O /dev/null "http://sentiment-api.ai-app.svc/api/sentiment?text=great+service+but+slow+delivery"
+            wget -q -O /dev/null "http://sentiment-api.ai-app.svc.cluster.local./api/sentiment?text=great+service+but+slow+delivery"
           done
       resources:
         requests: { cpu: 10m, memory: 16Mi }

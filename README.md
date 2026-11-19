@@ -12,7 +12,7 @@
 | ИИ-модель | мультиномиальный наивный байесовский классификатор (positive / negative / neutral), обучается при старте на `train.tsv` (88 фраз, en + ru) |
 | Образ | multi-stage Dockerfile, JRE собрана через `jlink`, база `alpine:3.22` — **66,4 МБ** (сжатый), ≈97 МБ распакованный |
 | Кластер | Minikube v1.39.0 (driver docker), Kubernetes v1.37.0, Helm v3.22.1 |
-| Kubernetes-объекты | Deployment (3 реплики), Service `LoadBalancer`, Ingress (`/api`), HPA (CPU 50 %, 3–4 пода) |
+| Kubernetes-объекты | Deployment (3 реплики), Service `LoadBalancer`, Ingress (`/api`), HPA (CPU 40 %, 3–4 пода) |
 | Мониторинг | Helm-чарты `prometheus-community/prometheus` и `grafana/grafana`, сбор метрик Actuator по аннотациям подов |
 
 ## Структура
