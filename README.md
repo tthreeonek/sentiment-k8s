@@ -116,6 +116,10 @@ Grafana: `kubectl -n monitoring port-forward svc/grafana 3000:80` → http://loc
   (иначе поды остаются в `Pending` с причиной `Insufficient cpu`);
 * вместо `kube-prometheus-stack` используются отдельные чарты Prometheus и Grafana: CRD и Prometheus Operator
   вместе с полным стеком не помещались в 2 ГБ (kube-apiserver один занимал ~470 МБ, узел уходил в swap);
-* HPA ограничен 4 репликами, JVM запускается с `-Xmx64m`.
+* HPA ограничен 4 репликами, JVM запускается с `-Xmx64m`;
+* целевая загрузка HPA — 40 % от requests: на одном ядре генератор нагрузки и CoreDNS забирают часть CPU,
+  и поды больше ~50m (50 %) не получают, поэтому при цели 50 % масштабирование не срабатывало;
+* генератор нагрузки обращается к сервису по полному имени с точкой (`sentiment-api.ai-app.svc.cluster.local.`),
+  чтобы не нагружать CoreDNS перебором search-доменов.
 
 На машине с 4 CPU / 8 ГБ эти ограничения не нужны.
